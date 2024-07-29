@@ -490,7 +490,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "multi_reader"
+name = "multi-reader"
 version = "0.1.0"
 dependencies = [
  "component",
