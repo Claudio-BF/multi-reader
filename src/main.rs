@@ -7,24 +7,18 @@ async fn main() {
     //get the inputs
     let args: Vec<String> = env::args().collect();
     let (file_path, text_lang, native_lang, langs) = parse_config(&args);
-    let num_langs = langs.len() as i32;
-
-    // respond to the inputs and flags
-    println!("loading file {file_path}");
+    let num_langs = langs.len();
 
     //parse the text file into an array of lines
-    let contents = fs::read_to_string(file_path).expect("Should have been able to read the file");
-    let original = contents.replace('\n', "");
-    let re = Regex::new(r"([.!?])").unwrap();
-    let parsed = re.replace_all(&original, "$1\n");
+    println!("loading file {file_path}");
+    let lines = get_lines(file_path);
 
-    // loop through the lines according to user commands
-    let lines: Vec<&str> = parsed.lines().collect();
-    let mut counter: i32 = 0;
+    //
+    let mut counter = 0;
     loop {
         //getting current line and language
-        let line_index = (counter / num_langs) as usize;
-        let lang_index = (counter % num_langs) as usize;
+        let line_index = counter / num_langs;
+        let lang_index = counter % num_langs;
         let current_line = lines[line_index].trim();
         let current_lang = &langs[lang_index];
 
@@ -44,18 +38,21 @@ async fn main() {
 
         //process user input and obey commands
         loop {
+            //get input
             let mut input = String::new();
             io::stdin()
                 .read_line(&mut input)
                 .expect("Failed to read line");
             let inp = input.trim();
+
+            //process input
             if inp.is_empty() {
                 counter += 1;
                 break;
             } else if is_numeric(inp) {
-                counter = inp.parse::<i32>().expect("could not read input") * num_langs;
+                counter = inp.parse::<usize>().expect("could not read input") * num_langs;
                 break;
-            } else if lang_index as i32 == num_langs - 1 {
+            } else if lang_index == num_langs - 1 {
                 println!("{}", translate(inp, native_lang, text_lang).await.unwrap());
             } else {
                 println!(
@@ -97,4 +94,13 @@ fn print_help() {
 }
 fn is_numeric(s: &str) -> bool {
     s.parse::<i32>().is_ok()
+}
+fn get_lines(file_path: &str) -> Vec<String> {
+    let contents = fs::read_to_string(file_path).expect("Should have been able to read the file");
+    let original = contents.replace('\n', "");
+    let re = Regex::new(r"([.!?])").unwrap();
+    let parsed = re.replace_all(&original, "$1\n");
+
+    // loop through the lines according to user commands
+    parsed.lines().map(|line| line.to_string()).collect()
 }
