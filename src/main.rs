@@ -13,7 +13,6 @@ async fn main() {
     println!("loading file {file_path}");
     let lines = get_lines(file_path);
 
-    //
     let mut progress = get_progress();
     let (mut counter, index) = get_current_file_progress(&mut progress, file_path);
     counter *= num_langs;
@@ -84,10 +83,10 @@ fn parse_config(args: &[String]) -> (&str, &str, &str, &[String]) {
 
 //function that gets input in between sections
 fn print_help() {
-    println!("usage: ./multi_reader [file path] [languages]");
+    println!("usage: ./multi-reader [file path] [languages]");
     println!("the first input language is the language of the text");
     println!("the last input language is the native language of the user");
-    println!("ex: multi_reader stella_maris_espanol.txt es en zh");
+    println!("ex: multi-reader stella_maris_espanol.txt es en zh");
 
     println!();
     println!("enter: next language/sentence");
@@ -121,10 +120,7 @@ fn parse_progress_line(line: &str) -> (String, usize) {
 fn get_progress() -> Vec<(String, usize)> {
     let contents =
         fs::read_to_string(PROGRESS_FILE).expect("could not read progress file at {PROGRESS_FILE}");
-    contents
-        .lines()
-        .map(|line| parse_progress_line(line))
-        .collect()
+    contents.lines().map(parse_progress_line).collect()
 }
 fn get_current_file_progress(
     all_progress: &mut Vec<(String, usize)>,
