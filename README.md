@@ -1,7 +1,11 @@
 A simple program made to learn Rust.
 It can read a txt file sentence by sentence and translate it into any language of your choosing.
 
-In order to use run:
+In order to use, you first need to create a file with read and write permissions enabled:
+/usr/local/share/multi-reader/progress.txt
+If you want to change this location you may edit the PROGRESS_FILE in the source code
+This wil.l allow multireader to remember your progress on books.
+Now run run:
 multi-reader -h
 
 And then follow the instructions.
