@@ -5,9 +5,9 @@ In order to use, you first need to create a file with read and write permissions
 
 /usr/local/share/multi-reader/progress.txt
 
-If you want to change this location you may edit the PROGRESS_FILE in the source code
-This wil.l allow multireader to remember your progress on books.
-Now run run:
+If you want to change this location you may edit the PROGRESS_FILE in the source code.
+This will allow multireader to remember your progress on books.
+Now run:
 
 multi-reader -h
 
