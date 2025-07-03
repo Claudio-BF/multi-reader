@@ -1,7 +1,7 @@
-A simple program made to learn Rust.
+A simple program made to learn helo you read books in other languages.
 It can read a txt file sentence by sentence and translate it into any language of your choosing.
 
-In order to use, you first need to create a file with read and write permissions enabled:
+In order to use, you need to create a file with read and write permissions enabled, I reccomend:
 
 /usr/local/share/multi-reader/progress.txt
 
@@ -19,4 +19,4 @@ regex
 rust-translate
 tokio
 
-I recommend "legally obtaining" a book in another langauge and converting it to a txt file using one of the many online tools available.
+I recommend downloading a book in another language and converting it to a txt file using one of the many online tools available.
