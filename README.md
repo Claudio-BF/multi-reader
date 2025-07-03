@@ -1,4 +1,4 @@
-A simple program made to learn helo you read books in other languages.
+A simple program made to help you read books in other languages.
 It can read a txt file sentence by sentence and translate it into any language of your choosing.
 
 In order to use, you need to create a file with read and write permissions enabled, I reccomend:
